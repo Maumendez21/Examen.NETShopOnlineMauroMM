@@ -1,0 +1,59 @@
+<nav class="navbar navbar-dark bg-dark fixed-top">
+
+    <!-- <nav class="nav justify-content-end">
+        <a class="nav-link active" style="font-size: 2rem;" aria-current="page" href="#">
+            <i class="icon ion-md-cart"></i>
+        </a>
+    </nav> -->
+
+    <div class="container-fluid">
+        <app-cart *ngIf=" !rol || rol === '3'"></app-cart>
+      <a class="navbar-brand" href="#">Compras en línea</a>
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      
+      
+      <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Menú General</h5>
+          <button type="button" id="closeCanvas" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+  
+        
+        <div class="offcanvas-body">
+          
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+
+            <li *ngIf="rol">
+              <h5>{{name || ''}}</h5>
+            </li>
+
+            <li *ngIf="!rol" class="nav-item">
+              <a class="nav-link" (click)="login()"><i class="icon ion-md-contact"></i> Iniciar Sesion</a>
+            </li>
+
+            <li *ngIf="rol === '3' || !rol" class="nav-item">
+              <a class="nav-link" [routerLink]="'/shop/home'" [routerLinkActive]="'active'"><i class="icon ion-md-apps me-2 lead"></i> Home</a>
+            </li>
+
+            <li *ngIf="rol === '1'" class="nav-item">
+              <a class="nav-link" [routerLink]="'/admin/shops'" [routerLinkActive]="'active'"><i class="icon ion-md-desktop me-2 lead"></i> Tiendas</a>
+            </li>
+
+            <li *ngIf="rol === '2'" class="nav-item">
+              <a class="nav-link" [routerLink]="'/admin/products'" [routerLinkActive]="'active'"><i class="icon ion-md-headset"></i>  Productos</a>
+            </li>
+
+            <li *ngIf="rol" class="nav-item">
+              <a class="nav-link"  (click)="logout()" ><i class="icon ion-md-exit"></i>  Cerrar sesión</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+     
+    </div>
+  </nav>

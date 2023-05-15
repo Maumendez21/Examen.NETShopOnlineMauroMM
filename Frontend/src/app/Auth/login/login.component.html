@@ -1,0 +1,32 @@
+<div class="login-box">
+    <h2>Iniciar sesión</h2>
+    <form [formGroup]="formLogin" (ngSubmit)="login()">
+        <div>
+            <input 
+            formControlName="email" 
+            type="text" name="email" 
+            class="form-control" 
+            required="">
+            <label>Email</label>
+        </div>
+        <div class="mt-3">
+            <input 
+            formControlName="password" 
+            class="form-control" 
+            type="password" 
+            name="password"
+             required="">
+            <label>Contraseña</label>
+        </div>
+
+        <button class="btn btn-primary mt-2 me-5" 
+        [disabled]="isLoading"
+        type="submit">
+            {{
+                isLoading ? 'Entrando...' : 'Iniciar Sesión'
+            }}
+        </button>
+
+        <a [routerLink]="'/register'" >Registrate aquí</a>
+    </form>
+</div>

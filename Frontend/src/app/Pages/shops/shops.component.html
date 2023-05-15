@@ -1,0 +1,110 @@
+<h1 class="mt-5">Administración de tiendas</h1>
+<br>
+
+<button class="btn btn-primary btn-sm mb-4" (click)="openModal(null)"
+data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop"
+>+ Nueva Tienda</button>
+
+<ng-template #loading>
+  <div class="alert alert-primary mt-3" role="alert">
+    Cargando...
+  </div>
+</ng-template>
+
+
+<table *ngIf="!isLoading; else loading" class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Tienda</th>
+        <th scope="col">Dirección</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let shop of listShops">
+        <th scope="row">{{shop.idShop}}</th>
+        <td>{{shop.nameShop}}</td>
+        <td>{{shop.address}}</td>
+        <td>
+            <button 
+            data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop"
+            (click)="openModal(shop)" class="btn btn-sm btn-primary me-2">
+                <i class="icon ion-md-create"></i>
+            </button>
+            <button data-bs-toggle="modal"
+            (click)="deleteModal(shop.idShop)"  
+            data-bs-target="#exampleModal" class="btn btn-sm btn-danger">
+
+                <i class="icon ion-md-trash"></i>
+            </button>
+            
+        </td>
+      </tr>
+
+    </tbody>
+</table>
+
+
+
+<div class="offcanvas offcanvas-start" data-bs-backdrop="static" tabindex="-1" id="staticBackdrop" aria-labelledby="staticBackdropLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="staticBackdropLabel">{{titleModal}}</h5>
+  </div>
+  <div class="offcanvas-body">
+    <div>
+      <form [formGroup]="shopForm" (ngSubmit)="submit()">
+        <div class="mb-3">
+          <label for="nameShop" class="form-label">Nombre de la tienda *</label>
+          <input 
+            type="text" 
+            formControlName="nameShop"
+            class="form-control" 
+            id="nameShop" 
+            name="nameShop" 
+            placeholder="Tienda Example">
+        </div>
+        <div class="mb-3">
+          <label for="address" class="form-label">Dirección *</label>
+          <input 
+            type="text" 
+            formControlName="address"
+            class="form-control" 
+            id="address" 
+            name="address" 
+            placeholder="Tienda Example">
+        </div>
+
+        <button type="button" class="btn btn-secondary me-3" id="closemodal" data-bs-dismiss="offcanvas">Cerrar</button>
+        <button type="submit" class="btn btn-primary" [disabled]="isLoading">
+          
+          {{
+            isLoading ? 'Cargando...' : 'Guardar'
+          }}
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Seguro que deseas eliminar?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="deletemodal" data-bs-dismiss="modal">Cancelar</button>
+        <button  (click)="delete()" type="button" class="btn btn-danger" [disabled]="isLoading">
+          {{
+            isLoading ? 'Cargando...' : 'Guardar'
+          }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

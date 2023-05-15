@@ -1,0 +1,46 @@
+<nav class="nav">
+   
+
+    <button type="button" class="btn btn-sm btn-primary position-relative"
+    data-bs-toggle="offcanvas" href="#offcanvasCart" role="button" aria-controls="offcanvasCart"
+    >
+        <i class="icon ion-md-cart"></i>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+          {{items.length}}
+          <span class="visually-hidden">unread messages</span>
+        </span>
+      </button>
+
+</nav>
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasCart" aria-labelledby="offcanvasCartLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasCartLabel">Carrito de compras</h5>
+      <div>
+        Total: ${{total}}
+      </div>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      
+    </div>
+    <div class="offcanvas-body">
+      <button class="btn btn-primary btn-block mb-3"
+      (click)="buy()"
+        [disabled]="items.length === 0 || isLoading"
+      >
+      {{
+        isLoading ? 'Pagando...'  : 'Pagar'
+      }}
+    </button>
+
+        <div *ngFor="let item of items; let i = index" class="card mb-2">
+            <div class="card-body">
+                <h5 class="card-title">{{item.NameProduct}}</h5>
+                <p class="card-text">Precio: ${{item.price}} </p>
+                <p class="card-text">Cantidad: </p>
+                <input type="number" [ngModel]="item['amount']" (ngModelChange)="addAmount(item,i, $event)" class="form-control mb-2">
+                <a href="#" class="btn btn-sm btn-danger">Eliminar</a>
+            </div>
+        </div>
+        
+    </div>
+  </div>

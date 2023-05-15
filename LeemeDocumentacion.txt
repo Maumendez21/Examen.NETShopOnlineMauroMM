@@ -1,0 +1,69 @@
+De acuerdo a lo solicitado en el documento que me hizo llegar la reclutadora Diana Monserrat Elias Júarez
+realicé el examén, además de lo solicitado implemente las funcionalidades correspondientes para que el sofware fuera de calidad.
+
+El proyecto esta conformado por estas tecnologias:
+*Backend que lleva el rol de servidor desarrollado con una API REST .NET Core 6.0.0, implementando una arquitectura de 3 capas
+*Frontend que lleva el rol de cliente desarrollado con el framework Angular en la versión 14.3.0, 
+*Base de datos diseñada e implementada en SQL Server, se adjunta en esta misma carpeta el archivo .bak, donde estube
+realizando mis pruebas de desarrollo.
+* Cloudinary servicio que ocupé como banco de imagenes, para subir y respaldar las imagenes de los productos
+
+Se tomó como principal 3 roles para los usuarios:
+1-SUPERADMIN : 
+	*encargado de dar de alta las tiendas
+	*cuando se registra una tienda se asigna en autamico un usuario ADMIN cuyas credenciales son: 
+		email: nombre de la tienda en minusculas sin espacios concatenando '@online.com'
+		password: nombre de la tienda en minusculas sin espacios
+2-ADMIN:
+	*encargado de dar mantenimiento a sus productos tales como; listar, agregar, eliminar. realcionandose asi productos M - 1 tiendas
+3-CLIENTE:
+	*Su función es la compra de productos, agregandolos al carrito de compras antes de realizar el pago.
+
+
+** Acciones antes de ejecutar proyecto:
+	-Hacer npm install a proyecto frontend para descargar todas las librerias utilizadas
+	-Restaurar paquetes nugget del proyecto Backend para poder ejecutar el proyecto correctamente (se hace en automatico en la mayoria de ocaciones)
+	-Restaurar archivo .bak en SQL Server, adjunto en esta carpeta
+	-Cambiar cadena de conexión dentro del archivo appsettings.json en el proyecto Backend API, a la del equipo a probar
+
+Usuarios actuales en base de datos:
+
+Rol SUPERADMIN:
+email: superadmin@gmail.com
+password: Admin123*$
+
+Rol ADMIN:
+
+email: sheinmexico@online.com
+password: sheinmexico
+
+email: aliexpress@online.com
+password: aliexpress
+
+email: steren@online.com
+password: steren
+
+Rol CLIENTE:
+email: sarah@gmail.com
+password: 123456
+
+email: prueba@gmail.com
+password: 123456
+
+
+Espero cumplir con sus espectativas equipo, muchas gracias! :D
+
+Mauro Mendez Merino
+2214231173
+Puebla, Puebla México 
+
+
+
+
+
+
+
+
+
+
+ 			

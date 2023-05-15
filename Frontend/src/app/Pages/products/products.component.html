@@ -1,0 +1,172 @@
+
+
+<h1 >Administración de productos</h1>
+<br>
+
+
+
+<button class="btn btn-primary btn-sm mb-4"
+(click)="openModal(null)"
+data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop"
+>+ Nuevo Producto</button>
+
+
+
+
+<ng-template #loading>
+  <div class="alert alert-primary mt-3" role="alert">
+    Cargando...
+  </div>
+</ng-template>
+
+
+<table *ngIf="!isLoading; else loading" class="table">
+    <thead>
+      <tr>
+        <th scope="col">Imagen</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Codigo</th>
+        <th scope="col">Descripción</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Stock</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of listProducts">
+        <th scope="row">
+          <img [src]="product.urlImage" style="width: 100px;" class="img-thumbnail" alt="Rounded image">
+        </th>
+        <td>{{product.nameProduct}}</td>
+        <td>{{product.codigo}}</td>
+        <td>{{product.descripcion}}</td>
+        <td>{{product.price}}</td>
+        <td>{{product.stock}}</td>
+        <td>
+            <button 
+            data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop"
+            (click)="openModal(product)"
+            class="btn btn-sm btn-primary me-2">
+                <i class="icon ion-md-create"></i>
+            </button>
+            <button 
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal" 
+            (click)="deleteModal(product.idPorduct)" class="btn btn-sm btn-danger">
+
+                <i class="icon ion-md-trash"></i>
+            </button>
+            
+        </td>
+      </tr>
+
+    </tbody>
+</table>
+
+
+
+<div class="offcanvas offcanvas-start" data-bs-backdrop="static" tabindex="-1" id="staticBackdrop" aria-labelledby="staticBackdropLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="staticBackdropLabel">{{titleModal}}</h5>
+  </div>
+  <div class="offcanvas-body">
+    <div>
+      <form [formGroup]="productForm" (ngSubmit)="submit()">
+
+
+        <div class="mb-3">
+          <label for="nameShop" class="form-label">Nombre del producto *</label>
+          <input 
+            type="text" 
+            formControlName="nameProduct"
+            class="form-control" 
+            id="nameProduct" 
+            name="nameProduct" 
+            placeholder="Product Example">
+        </div>
+        <div class="mb-3">
+          <label for="nameShop" class="form-label">Descripción del producto *</label>
+          <textarea
+          formControlName="descripcion"
+            class="form-control" 
+            id="descripcion" 
+            name="descripcion" 
+            placeholder="Descripcion Example"
+          >
+
+          </textarea>
+          
+        </div>
+        <div class="mb-3">
+          <label for="nameShop" class="form-label">Codigo *</label>
+          <input 
+            type="text" 
+            formControlName="codigo"
+            class="form-control" 
+            id="codigo" 
+            name="codigo" 
+            placeholder="Codigo">
+        </div>
+        <div class="mb-3">
+          <label for="address" class="form-label">Precio *</label>
+          <input 
+            type="number" 
+            formControlName="price"
+            class="form-control" 
+            id="price" 
+            name="price" 
+            placeholder="Precio Example">
+        </div>
+        <div class="mb-3">
+          <label for="address" class="form-label">Stock *</label>
+          <input 
+            type="number" 
+            formControlName="stock"
+            class="form-control" 
+            id="stock" 
+            name="stock" 
+            placeholder="STOCK Example">
+        </div>
+
+       
+        <label for="address" class="form-label">Selecciona la portada *</label>
+        <div class="input-group mb-3">
+          <input type="file" class="form-control" (change)="fileChange($event)" id="inputGroupFile01">
+        </div>
+        <img *ngIf="imgSelected" [src]="imgSelected" class="img-thumbnail" alt="Rounded image">
+
+        <button type="button" class="btn btn-secondary me-3" id="closemodal" data-bs-dismiss="offcanvas">Cerrar</button>
+        <button type="submit" class="btn btn-primary"
+          [disabled]="isLoading"
+        >
+        {{
+          isLoading ? 'Cargando...' : 'Guardar'
+        }}
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Seguro que deseas eliminar?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="deletemodal" data-bs-dismiss="modal">Cancelar</button>
+        <button [disabled]="isLoading" (click)="delete()" type="button" class="btn btn-danger">
+          
+          {{
+            isLoading ? 'Cargando...' : 'Guardar'
+          }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

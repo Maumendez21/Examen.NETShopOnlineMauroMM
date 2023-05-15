@@ -1,0 +1,19 @@
+<h1>Productos</h1>
+<br>
+<div class="row">
+    <div *ngFor="let product of listProducts" class="col-lg-4 col-xl-2 col-xs-12 col-md-6 mt-3" style="margin-right: 8rem;">
+        <div class="card" style="width: 19rem;">
+            <img [src]="product.urlImage" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{product.nameProduct}}</h5>
+              <p class="card-text">{{product.descripcion}}.</p>
+              <p class="card-text">Disponibles: {{product.stock}}</p>
+              <p class="card-text text-bold">${{product.price}}</p>
+              <p class="card-text">Vendido por: {{product.shop!.nameShop}}</p>
+            </div>
+            <div class="card-body">
+                <a (click)="addToCart(product)" class="btn btn-primary btn-sm mt-1" >+ Agregar al carrito</a>
+            </div>
+        </div>
+    </div>
+</div>
